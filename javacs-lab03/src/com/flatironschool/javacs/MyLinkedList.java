@@ -85,8 +85,19 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		// TODO: fill this in
-	}
+		if (index == 0)
+		{
+			head = new Node(element, head);
+		}
+		else
+		{
+			Node current = getNode(index-1);
+			current.next = new Node(element, current.next);
+		}
+		size++;
+		}
+      
+    	
 
 	@Override
 	public boolean addAll(Collection<? extends E> collection) {
@@ -146,8 +157,19 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: fill this in
-		return -1;
+		
+      Node current = head;
+      
+      for(int i=0; i < size; i++)
+      {
+         if(equals(target,current.cargo)) 
+         {
+            return i;
+         }
+         
+         current = current.next;
+      }
+      return -1;
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -201,8 +223,13 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean remove(Object obj) {
-		// TODO: fill this in
-		return false;
+		int index = indexOf(obj);
+      if(index == -1)
+      {  
+         return false;
+      }
+      remove(index);
+		return true;
 	}
 
 	@Override
